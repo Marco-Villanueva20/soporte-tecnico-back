@@ -18,14 +18,16 @@ public class Ticket {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
+
 	private String descripcion;
+	private String estado;
+
 	@Column(name = "fecha_creacion")
 	private LocalDateTime fechaCreacion;
-	
-	@Column(name = "estado_ticket_id")
-	private Long estadoTicketId;
+
 	@Column(name = "cliente_id")
 	private Long clienteId;
+	
 	@Column(name = "trabajador_id")
 	private Long trabajadorId;
 }

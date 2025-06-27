@@ -18,11 +18,15 @@ public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String mensaje;
+
 	@Column(name = "fecha_mensaje")
 	private LocalDateTime fechaMensaje;
+
 	@Column(name = "ticket_id")
 	private Long ticketId;
+
 	@Column(name = "usuario_id")
 	private Long usuarioId;
 
