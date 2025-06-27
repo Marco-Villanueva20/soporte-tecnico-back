@@ -20,7 +20,7 @@ public class Chat {
 	private Long id;
 	private String mensaje;
 	@Column(name = "fecha_mensaje")
-	private LocalDateTime FechaMensaje;
+	private LocalDateTime fechaMensaje;
 	@Column(name = "ticket_id")
 	private Long ticketId;
 	@Column(name = "usuario_id")
