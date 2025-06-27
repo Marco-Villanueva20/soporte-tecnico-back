@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
-import com.cibertec.model.Ticket;
+import com.cibertec.model.DetPregFrecuentes;
 
-public interface TicketService {
-	 ResponseEntity<Map<String, Object>> crear(Ticket ticket);
-	 ResponseEntity<Map<String, Object>> actualizar(Ticket ticket);
+public interface DetPregFrecuentesService {
+	 ResponseEntity<Map<String, Object>> crear(DetPregFrecuentes detPregFrecuentes);
+	 ResponseEntity<Map<String, Object>> actualizar(DetPregFrecuentes detPregFrecuentes);
 	 ResponseEntity<Map<String, Object>> eliminar(Long id);
 	 ResponseEntity<Map<String, Object>> listar();
 	 ResponseEntity<Map<String, Object>> buscarPorId(Long id);

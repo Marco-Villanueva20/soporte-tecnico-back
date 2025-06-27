@@ -20,15 +20,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-	
-	
 
-	
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		
-		
 		try {
 			Auth auth = new ObjectMapper().readValue(request.getReader(), Auth.class);
 			

@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 public class SecurityConfig {
 
 	private final UserDetailsService userDetailsService;
-	private final JWTAuthotizationFilter jwtAuthotizationFilter;
+	private final JwtAuthorizationFilter jwtAuthorizationFilter;
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
@@ -33,11 +33,11 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/api/usuarios/auth/**").permitAll() // rutas abiertas (login, registro)
 						.requestMatchers("/admin/**").hasRole("ADMIN") // solo admin puede acceder a /admin/**
 						.requestMatchers("/usuario/**").hasAnyRole("USER", "ADMIN") // usuarios y admins pueden acceder
-						.anyRequest().authenticated() // todo lo demas requiere estar autenticado
+						.anyRequest().authenticated() // lo demas requiere estar autenticado
 				).httpBasic(Customizer.withDefaults())
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilter(jwtAuthenticationFilter)
-				.addFilterBefore(jwtAuthotizationFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 
 	}
@@ -47,15 +47,6 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	/*
-	 * @Bean UserDetailsService userDetailsService() { InMemoryUserDetailsManager
-	 * memoryManager = new InMemoryUserDetailsManager(); memoryManager.createUser(
-	 * User .withUsername("javier") .password(passwordEncoder().encode("password"))
-	 * .roles() .build() );
-	 * 
-	 * return memoryManager; }
-	 */
-
 	@Bean
 	AuthenticationManager authManager(HttpSecurity http) throws Exception {
 		AuthenticationManagerBuilder authManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
@@ -63,9 +54,4 @@ public class SecurityConfig {
 		return authManagerBuilder.build();
 	}
 
-	/*
-	 * public static void main(String[] args) {
-	 * System.out.println("Password encriptadda:" + new
-	 * BCryptPasswordEncoder().encode("javier")); }
-	 */
 }
