@@ -2,8 +2,6 @@ package com.cibertec.service.impl;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.stream.Collectors;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,17 +18,14 @@ public class UserDetailImplement implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-	    if (usuario.getRoles() == null || usuario.getRoles().isEmpty()) {
+		String rol = usuario.getRol(); 
+		
+		if (rol == null || rol.isEmpty()) {
 	        return Collections.emptyList();
 	    }
+		final String roleName = rol.startsWith("ROLE_") ? rol : "ROLE_" + rol;
 
-	    return usuario.getRoles().stream()
-	        .map(rol -> {
-	            String nombre = rol.getNombre();
-	            final String roleName = nombre.startsWith("ROLE_") ? nombre : "ROLE_" + nombre;
-	            return (GrantedAuthority) () -> roleName;
-	        })
-	        .collect(Collectors.toList());
+		return Collections.singletonList(() -> roleName);
 	}
 
 

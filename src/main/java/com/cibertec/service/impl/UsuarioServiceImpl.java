@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.cibertec.model.Auth;
 import com.cibertec.model.Usuario;
-import com.cibertec.repository.RolRepository;
 import com.cibertec.repository.UsuarioRepository;
 import com.cibertec.service.UsuarioService;
 
@@ -18,8 +17,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	@Autowired
-	private RolRepository rolRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder; // Para encriptar contraseñas si es necesario
@@ -44,10 +41,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		    usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			usuario.setEmail(usuario.getEmail().toLowerCase()); // email en minúsculas
 		
-			usuario.getRoles().forEach(rol -> {
-				// Asegurarse de que los roles estén en minúsculas
-				rol.setNombre(rol.getNombre().toLowerCase());
-			});
+			usuario.setRol(usuario.getRol().toUpperCase());
 			
 			Usuario nuevoUsuario = usuarioRepository.save(usuario);
 			Usuario usuarioMapeado = usuarioRepository.findById(nuevoUsuario.getId())
