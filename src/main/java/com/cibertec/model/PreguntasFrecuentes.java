@@ -16,7 +16,9 @@ public class PreguntasFrecuentes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String nombre;
+	
 	@Column(name = "usuario_id")
 	private Long usuarioId;
 }

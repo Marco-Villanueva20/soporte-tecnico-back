@@ -16,8 +16,10 @@ public class DetallePregFrecuentes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String titulo;
 	private String descripcion;
+
 	@Column(name = "preg_frec_id")
 	private Long preguntaFrecuenteId; 
 

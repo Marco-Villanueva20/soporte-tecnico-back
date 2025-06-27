@@ -4,40 +4,24 @@ CREATE DATABASE IF NOT EXISTS soporte_tecnico;
 USE soporte_tecnico;
 
 -- Tabla `usuarios`
-CREATE TABLE usuarios (
+CREATE TABLE usuarios(
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
 	roles ENUM('ADMIN', 'CLIENTE', 'TECNICO') NOT NULL,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 
--- Tabla `estado_ticket`
-CREATE TABLE estado_ticket (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) UNIQUE NOT NULL
-);
-
--- Insertar los estados iniciales
-INSERT INTO estado_ticket (nombre) VALUES
-('Abierto'),
-('En Proceso'),
-('Resuelto'),
-('Cerrado'),
-('Pendiente de Cliente');
 
 -- Tabla `ticket`
 CREATE TABLE ticket (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     descripcion TEXT NOT NULL,
+    estado ENUM('ABIERTO','EN PROCESOR','RESUELTO','CERRADO') NOT NULL,
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-    estado_id BIGINT NOT NULL,
-    CONSTRAINT fk_ticket_estado FOREIGN KEY (estado_id)
-        REFERENCES estado_ticket(id) ON UPDATE CASCADE ON DELETE RESTRICT,
     
     cliente_id BIGINT NOT NULL,
     CONSTRAINT fk_ticket_cliente FOREIGN KEY (cliente_id)
