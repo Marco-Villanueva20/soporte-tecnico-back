@@ -18,7 +18,7 @@ public class Usuario {
 	
 	private String email;
 	private String password;
-	private String roles;
+	private String rol;
 	@Column(name = "fecha_registro")
 	private LocalDateTime fechaRegistro;
 

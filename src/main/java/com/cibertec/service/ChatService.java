@@ -8,10 +8,12 @@ import com.cibertec.model.Chat;
 
 
 public interface ChatService {
-	public ResponseEntity<Map<String, Object>> crear(Chat chat);
-	public ResponseEntity<Map<String, Object>> actualizar(Chat chat);
-	public ResponseEntity<Map<String, Object>> eliminar(Long id);
-	public ResponseEntity<Map<String, Object>> listar();
-	public ResponseEntity<Map<String, Object>> buscarPorId(Long id);
+	 ResponseEntity<Map<String, Object>> crear(Chat chat);
+	 ResponseEntity<Map<String, Object>> actualizar(Chat chat);
+	 ResponseEntity<Map<String, Object>> eliminar(Long id);
+	 ResponseEntity<Map<String, Object>> listar();
+
+	ResponseEntity<Map<String, Object>> buscarPorId(Long id);
+
 
 }

@@ -3,8 +3,7 @@ package com.cibertec.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cibertec.model.Chat;
+import org.springframework.stereotype.Repository;
 
-public interface ChatRepository extends JpaRepository<Chat, Long> {
-	
-
-}
+@Repository
+public interface ChatRepository extends JpaRepository<Chat, Long> {}

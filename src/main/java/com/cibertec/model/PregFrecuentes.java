@@ -11,14 +11,14 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "preg_frecuentes")
-public class PreguntasFrecuentes {
+public class PregFrecuentes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String nombre;
-	
+
 	@Column(name = "usuario_id")
 	private Long usuarioId;
 }

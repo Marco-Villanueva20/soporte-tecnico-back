@@ -1,5 +1,6 @@
 package com.cibertec.service.impl;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,13 +13,14 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserDetailImplement implements UserDetails {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuario;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		String rol = usuario.getRol(); 
+		String rol = usuario.getRol();
 		
 		if (rol == null || rol.isEmpty()) {
 	        return Collections.emptyList();
@@ -40,12 +42,10 @@ public class UserDetailImplement implements UserDetails {
 		return usuario.getEmail();
 	}
 
-	public String getTelefono() {
-		return usuario.getTelefono();
-	}
 	public String getNombres() {
 		return usuario.getNombres();
 	}
+
 	public String getApellidos() {
 		return usuario.getApellidos();
 	}

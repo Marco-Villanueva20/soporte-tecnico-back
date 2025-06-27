@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "det_preg_frecuentes")
-public class DetallePregFrecuentes {
+public class DetPregFrecuentes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
