@@ -34,7 +34,8 @@ public class SecurityConfig {
 						.requestMatchers("/admin/**").hasRole("ADMIN") // solo admin puede acceder a /admin/**
 						.requestMatchers("/usuario/**").hasAnyRole("USER", "ADMIN") // usuarios y admins pueden acceder
 						.anyRequest().authenticated() // lo demas requiere estar autenticado
-				).httpBasic(Customizer.withDefaults())
+				)
+				.httpBasic(Customizer.withDefaults())
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilter(jwtAuthenticationFilter)
 				.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)

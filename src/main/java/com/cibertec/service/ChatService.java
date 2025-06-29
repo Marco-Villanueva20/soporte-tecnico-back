@@ -8,6 +8,9 @@ import com.cibertec.model.Chat;
 
 
 public interface ChatService {
+
+	ResponseEntity<?> enviarMensaje(Chat chat);
+
 	 ResponseEntity<Map<String, Object>> crear(Chat chat);
 	 ResponseEntity<Map<String, Object>> actualizar(Chat chat);
 	 ResponseEntity<Map<String, Object>> eliminar(Long id);
