@@ -1,11 +1,13 @@
 package com.cibertec.security;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.cibertec.model.Auth;
@@ -50,10 +52,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 					throws IOException, ServletException {
 		
 		UserDetailImplement userDetails = (UserDetailImplement) authResult.getPrincipal();
+		String rol = userDetails.getAuthorities().stream()
+			    .findFirst()
+			    .map(GrantedAuthority::getAuthority)
+			    .orElse("");
 
-		String token = JwtTokenProvider.crearToken(userDetails.getNombres(), userDetails.getUsername());
+		String token = JwtTokenProvider.crearToken(userDetails.getNombres(), userDetails.getUsername(), rol);
+		System.out.println("==> Token generado: " + token);
 		
 		response.addHeader("Authorization", "Bearer " + token);
+		System.out.println("[DEBUG] Authorization header: " + token);
 		
 		response.getWriter().flush();
 		

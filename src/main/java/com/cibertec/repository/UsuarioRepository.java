@@ -10,6 +10,5 @@ import com.cibertec.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-	@EntityGraph(attributePaths = {"roles"})
 	Optional<Usuario> findOneByEmail(String email);
 }

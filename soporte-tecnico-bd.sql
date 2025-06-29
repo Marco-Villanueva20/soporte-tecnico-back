@@ -1,7 +1,7 @@
-CREATE DATABASE IF NOT EXISTS soporte_tecnico;
+CREATE DATABASE IF NOT EXISTS soportetecnico;
 
 -- Usar la base de datos recién creada
-USE soporte_tecnico;
+USE soportetecnico;
 
 -- Tabla `usuarios`
 CREATE TABLE usuarios(
@@ -75,6 +75,6 @@ CREATE TABLE det_preg_frecuentes (
 );
 
 -- Ajuste de codificación de la base de datos
-ALTER DATABASE soporte_tecnico CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE soportetecnico CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 

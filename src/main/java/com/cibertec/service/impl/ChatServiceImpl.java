@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import com.cibertec.model.Chat;
@@ -22,6 +24,23 @@ public class ChatServiceImpl implements ChatService {
 
 	@Autowired
 	private ChatRepository chatRepository;
+
+	@Autowired
+	private SimpMessagingTemplate messagingTemplate;
+
+
+	@Override
+	public ResponseEntity<?> enviarMensaje(Chat chat) {
+		// Validar y guardar mensaje
+		if (chat.getFechaMensaje() == null) {
+			chat.setFechaMensaje(LocalDateTime.now());
+		}
+		Chat guardado = chatRepository.save(chat);
+
+		String destino = "/topic/chat/" + guardado.getTicketId();
+		messagingTemplate.convertAndSend(destino, guardado);
+        return ResponseEntity.ok("Se guardo el mensaje");
+    }
 
 	@Override
 	public ResponseEntity<Map<String, Object>> crear(Chat chat) {
